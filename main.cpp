@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 //lalalalalal
+//lalalalalal
 using namespace std;
 
 int calcularPrim(int ult, vector<int> &v,vector<vector<int>> &m2) {
