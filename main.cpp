@@ -37,8 +37,10 @@ void calcular(int ult,int actual, vector<int> &v,vector<vector<int>> &m2, int & 
     }
     if(k==1){
         int res = 0;
-        for(int i = 0; i<v.size();i++){
-            res = res + abs(v[actual] - v[i]);
+        for(int i = ult; i<v.size();i++){
+            int temp1 = abs(v[ult] - v[i]);
+            int temp2 = abs(v[actual] - v[i]);
+            res = res + min(temp1,temp2);
         }
         m2[ult+2][actual] = res;
     }
