@@ -75,18 +75,28 @@ int distribuir(int i, int ult, int k, vector<int> &v, vector<vector<vector<int>>
 }
 
 int main(){
-    int N;
-    int K;
-    vector<int> V;
-    N = 5;
-    K = 1;
-    V = {4,5,6,7,8};
-    vector<vector<vector<int>>> memoria(K+2, vector<vector<int>>(N+1, vector<int>(N+1, -1)));
-    vector<vector<int>> memoria2(N+3, vector<int>(N+2,-1));
-    vector<vector<vector<decision>>> memoria3(K+2, vector<vector<decision>>(N+1, vector<decision>(N+1, UNDEF)));
-
-    int res = distribuir(0,-1,K,V,memoria,memoria2,memoria3);
-    vector<int> ubics = armarSol(memoria3,V,K);
-    return 0;
-
+    int cantTest;
+    cin>>cantTest;
+    for(int i = 0; i < cantTest;i++){
+        int cantPuestos;
+        int cantProvedurias;
+        cin>>cantPuestos;
+        cin>>cantProvedurias;
+        vector<int> ubicaciones;
+        for(int j = 0; j< cantPuestos;j++){
+            int ub;
+            cin>>ub;
+            ubicaciones.push_back(ub);
+        }
+        vector<vector<vector<int>>> memoria(cantProvedurias+2, vector<vector<int>>(cantPuestos+1, vector<int>(cantPuestos+1, -1)));
+        vector<vector<int>> memoria2(cantPuestos+3, vector<int>(cantPuestos+2,-1));
+        vector<vector<vector<decision>>> memoria3(cantProvedurias+2, vector<vector<decision>>(cantPuestos+1, vector<decision>(cantPuestos+1, UNDEF)));
+        int res = distribuir(0,-1,cantProvedurias,ubicaciones,memoria,memoria2,memoria3);
+        vector<int> ubics = armarSol(memoria3,ubicaciones,cantProvedurias);
+        cout<<res<<endl;
+        for(int p = 0; p<ubics.size();p++){
+            cout<<ubics[p]<<" ";
+        }
+        cout<<endl;
+    }
 };
