@@ -42,14 +42,14 @@ void calcular(int ult,int actual, vector<int> &v,vector<vector<int>> &m2, int & 
             int temp2 = abs(v[actual] - v[i]);
             res = res + min(temp1,temp2);
         }
-        m2[ult+2][actual] = res;
+        m2[m2.size()-1][actual] = res;
     }
 
 }
 
 int distribuir(int i, int ult, int k, vector<int> &v, vector<vector<vector<int>>> &m, vector<vector<int>> &m2,vector<vector<vector<decision>>> &m3 ){
     if(k==0){
-        return 0;
+        return  m2[m2.size()-1][ult];
     }
     else if( k < 0 || i == v.size() || (v.size()-i)< k){
         return 1000000000;
@@ -60,9 +60,6 @@ int distribuir(int i, int ult, int k, vector<int> &v, vector<vector<vector<int>>
         }
         if(m[k][ult+1][i] == -1){
             int poner = m2[ult+1][i] + distribuir(i+1,i,k-1,v,m,m2,m3);
-            if(k == 1){
-                poner = poner + m2[ult+2][i];
-            }
             int no_poner = distribuir(i+1,ult,k,v,m,m2,m3);
             if(poner <= no_poner){
                 m3[k][ult+1][i] = poner_;
@@ -81,9 +78,9 @@ int main(){
     int N;
     int K;
     vector<int> V;
-    N = 4;
+    N = 5;
     K = 2;
-    V = {1,5,15,20};
+    V = {4,5,6,7,8};
     vector<vector<vector<int>>> memoria(K+2, vector<vector<int>>(N+1, vector<int>(N+1, -1)));
     vector<vector<int>> memoria2(N+2, vector<int>(N,-1));
     vector<vector<vector<decision>>> memoria3(K+2, vector<vector<decision>>(N+1, vector<decision>(N+1, UNDEF)));
