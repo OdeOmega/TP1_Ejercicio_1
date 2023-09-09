@@ -79,20 +79,24 @@ int distribuir(int i,int ult, int &N, int K, int &Kinicial, vector<int> &V, vect
         if(m2[ult][i] == -1){
             calcular(ult,i,V,m2);
         }
+        if(i == 2 && ult == 0){
+            bool jeje = true;
+        }
         int noPonerla = distribuir(i+1,ult,N,K,Kinicial,V,m,m2,m3);
         int ponerla = m2[ult][i] + temp1;
         if(m[i][K][ult] != -1){
-            m[i][K][ult] = min(min(noPonerla,ponerla),m[i][K][ult]);
+            m[i][K][ult] = min(min(ponerla,noPonerla),m[i][K][ult]);
         }
         if(m[i][K][ult] == -1){
-            m[i][K][ult] = min(noPonerla,ponerla);
-        }
-        if (min(ponerla,noPonerla) == ponerla){
-            m3[i][K][ult] = poner;
+            m[i][K][ult] = min(ponerla,noPonerla);
         }
         if (min(ponerla,noPonerla) == noPonerla){
             m3[i][K][ult] = noPoner;
         }
+        if (min(ponerla,noPonerla) == ponerla){
+            m3[i][K][ult] = poner;
+        }
+
         return m[i][K][ult];
     }
     else if(i < N && K > 0) {
@@ -125,9 +129,9 @@ int main(){
     int N;
     int K;
     vector<int> V;
-    N = 4;
+    N = 5;
     K = 2;
-    V = {1,5,15,20};
+    V = {1,5,15,20,27};
     vector<vector<vector<int>>> memoria(N+1, vector<vector<int>>(K+1, vector<int>(N+1, -1)));
     vector<vector<int>> memoria2(N, vector<int>(N,-1));
     vector<vector<vector<decision>>> memoria3(N+1, vector<vector<decision>>(K+1, vector<decision>(N+1, UNDEF)));
