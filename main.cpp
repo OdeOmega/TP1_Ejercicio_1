@@ -82,10 +82,10 @@ int distribuir(int i,int ult, int &N, int K, int &Kinicial, vector<int> &V, vect
         int noPonerla = distribuir(i+1,ult,N,K,Kinicial,V,m,m2,m3);
         int ponerla = m2[ult][i] + temp1;
         if(m[i][K][ult] != -1){
-            m[i][K][ult] = min(min(ponerla,noPonerla),m[i][K][ult]);
+            m[i][K][ult] = min(min(noPonerla,ponerla),m[i][K][ult]);
         }
         if(m[i][K][ult] == -1){
-            m[i][K][ult] = min(ponerla,noPonerla);
+            m[i][K][ult] = min(noPonerla,ponerla);
         }
         if (min(ponerla,noPonerla) == ponerla){
             m3[i][K][ult] = poner;
@@ -102,15 +102,18 @@ int distribuir(int i,int ult, int &N, int K, int &Kinicial, vector<int> &V, vect
         int noPonerla = distribuir(i+1,ult,N,K,Kinicial,V,m,m2,m3);
         int ponerla = m2[ult][i] + distribuir(i+1,i,N,K-1,Kinicial,V,m,m2,m3);
         if(m[i][K][ult] != -1){
-            m[i][K][ult] = min(min(ponerla,noPonerla),m[i][K][ult]);
+            m[i][K][ult] = min(min(noPonerla,ponerla),m[i][K][ult]);
         }
         if(m[i][K][ult] == -1){
-            m[i][K][ult] = min(ponerla,noPonerla);
+            m[i][K][ult] = min(noPonerla,ponerla);
         }
         if (min(ponerla,noPonerla) == ponerla){
             m3[i][K][ult] = poner;
         }
         if (min(ponerla,noPonerla) == noPonerla){
+            m3[i][K][ult] = noPoner;
+        }
+        if(ponerla == noPonerla){
             m3[i][K][ult] = noPoner;
         }
         return m[i][K][ult];
