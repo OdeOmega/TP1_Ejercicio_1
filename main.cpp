@@ -10,10 +10,11 @@ vector<int> armarSol(vector<vector<vector<decision>>> &m3, vector<int> &v, int K
     for(int i = 0; i < v.size();i++){
         if(m3[K][ult][i] == poner_){
             K = K-1;
-            ult = i;
+            ult = i+1;
             res.push_back(v[i]);
         }
     }
+
     return res;
 }
 
@@ -24,7 +25,8 @@ void calcular(int ult,int actual, vector<int> &v,vector<vector<int>> &m2, int & 
             res = res + abs(v[actual] - v[i]);
         }
         m2[ult+1][actual] = res;
-    } else{
+    }
+    else{
         int res = 0;
         int ultVal = v[ult];
         int actualVal = v[actual];
@@ -37,10 +39,8 @@ void calcular(int ult,int actual, vector<int> &v,vector<vector<int>> &m2, int & 
     }
     if(k==1){
         int res = 0;
-        for(int i = ult; i<v.size();i++){
-            int temp1 = abs(v[ult] - v[i]);
-            int temp2 = abs(v[actual] - v[i]);
-            res = res + min(temp1,temp2);
+        for(int i = actual; i<v.size();i++){
+            res = res + abs(v[actual]-v[i]);
         }
         m2[m2.size()-1][actual] = res;
     }
@@ -79,10 +79,10 @@ int main(){
     int K;
     vector<int> V;
     N = 5;
-    K = 2;
+    K = 1;
     V = {4,5,6,7,8};
     vector<vector<vector<int>>> memoria(K+2, vector<vector<int>>(N+1, vector<int>(N+1, -1)));
-    vector<vector<int>> memoria2(N+2, vector<int>(N,-1));
+    vector<vector<int>> memoria2(N+3, vector<int>(N+2,-1));
     vector<vector<vector<decision>>> memoria3(K+2, vector<vector<decision>>(N+1, vector<decision>(N+1, UNDEF)));
 
     int res = distribuir(0,-1,K,V,memoria,memoria2,memoria3);
