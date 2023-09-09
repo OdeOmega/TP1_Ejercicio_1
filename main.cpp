@@ -90,13 +90,4 @@ int main(){
     vector<int> ubics = armarSol(memoria3,V,K);
     return 0;
 
-/*
-    if(K==1){
-        vector<int> vacio;
-        vacio.push_back(v[(N-1)/2]);
-        ubics = vacio;
-    }
-
-    return 0;
-    */
 };
