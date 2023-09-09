@@ -130,7 +130,7 @@ int main(){
     int K;
     vector<int> V;
     N = 5;
-    K = 2;
+    K = 3;
     V = {1,5,15,20,27};
     vector<vector<vector<int>>> memoria(N+1, vector<vector<int>>(K+1, vector<int>(N+1, -1)));
     vector<vector<int>> memoria2(N, vector<int>(N,-1));
